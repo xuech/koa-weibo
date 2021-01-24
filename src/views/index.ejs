@@ -7,5 +7,21 @@
   <body>
     <h1><%= title %></h1>
     <p>EJS Welcome to <%= title %></p>
+    <!-- <div>
+      <%# 这个是注释 %>
+      <% if(isMe) { %>
+        <a style='color:orange'>是我</a>
+      <% } else { %>
+        <a style='color:red'>不是我</a>
+      <% } %>
+    </div> -->
+    <hr>
+    <%- include('widgets/user-info', { isMe }); %>
+
+    <ul>
+      <% users.forEach(function(user){ %>
+        <%- include('widgets/user-list', {user: user}); %>
+      <% }); %>
+    </ul>
   </body>
 </html>
