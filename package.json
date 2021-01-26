@@ -31,5 +31,8 @@
     "nodemon": "^1.19.1",
     "pre-commit": "^1.2.2",
     "redis": "^3.0.2"
-  }
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }
