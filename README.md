@@ -33,3 +33,9 @@
     例如：删除user表中id为1的数据，那么同时可以删除blogs表中该id所创建的所有数据
     2. RESTRICT： 当在主键表中删除对应记录时，首先检查该记录是否有对应外键，如果有则不允许删除。
     3. SET NULL：当在主键表中删除对应记录时，首先检查该记录是否有对应外键，如果有则设置子表中该外键值为null。
+
+## 三、eslint、pre-commit等项目规范
+1. 新增 `.eslintignore` `.eslintrc.json`等文件
+2. 安装`babel-eslint`、`eslint`插件
+3. 安装`pre-commit`预验
+4. inspact调试
