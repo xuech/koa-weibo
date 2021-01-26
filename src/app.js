@@ -9,7 +9,7 @@ const redisKoa = require('koa-redis')
 const genericSession = require('koa-generic-session')
 const { REDIS_CONF } = require('./conf/db')
 const index = require('./routes/index')
-const users = require('./routes/users')
+const user = require('./routes/view/user')
 const errorViewRouter = require('./routes/view/error')
 
 // error handler
@@ -51,7 +51,7 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(user.routes(), user.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) //404 放在最下
 
 // error-handling
