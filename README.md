@@ -1,6 +1,10 @@
 # koa-weibo
 仿新浪微博的后端项目
 
+整体架构设计
+
+![1](static/images/1.png)
+
 ## 一、初始化项目
 1. 通过脚手架创建项目`koa2 -e koa-generator`
 2. 安装`cross-env`设置环境变量
