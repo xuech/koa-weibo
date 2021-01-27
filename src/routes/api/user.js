@@ -2,6 +2,7 @@ const router = require('koa-router')()
 const { isExist, doRegister, doLogin } =require('../../controller/user')
 const userValidate = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
+const { loginCheck } = require('../../middlewares/loginChecks')
 
 router.prefix('/api/user')
 /// 用户名是否存在

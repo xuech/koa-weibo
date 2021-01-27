@@ -22,5 +22,10 @@ module.exports = {
     jsonSchemaFileInfo: {
         code: 10005,
         message: '数据格式校验错误'
-    }
+    },
+    // 未登录
+    loginCheckFailInfo: {
+        code: 10006,
+        message: '您尚未登录'
+    },
 }
