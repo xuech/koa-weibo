@@ -33,4 +33,8 @@ module.exports = {
         code: 10007,
         message: '删除用户失败'
     },
+    changeInfoFailInfo: {
+        code: 10008,
+        message: '用户更新失败'
+    }
 }

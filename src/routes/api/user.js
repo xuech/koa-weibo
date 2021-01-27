@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const { isExist, doRegister, doLogin , deleteCurUser} =require('../../controller/user')
+const { isExist, doRegister, doLogin , deleteCurUser, changeInfo} =require('../../controller/user')
 const userValidate = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
 const { loginCheck } = require('../../middlewares/loginChecks')
@@ -30,5 +30,11 @@ router.post('/delete',loginCheck, async (ctx, next) => {
     const { userName } = ctx.session.userInfo
     ctx.body = await deleteCurUser(userName)
     // }
+})
+
+/// 用户修改
+router.patch('/changeInfo', loginCheck, async (ctx, next) => {
+    const { nickName, city } = ctx.request.body
+    ctx.body = await changeInfo({ctx, nickName, city })
 })
 module.exports = router

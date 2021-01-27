@@ -62,8 +62,20 @@ async function deleteUser(userName) {
     return data > 0
 }
 
+async function updateUser({userName, nickName, city }) {
+    // 找到userName 更新对应的nickName和city
+    // 第一个对象是要修改的数据，第二个对象中是查询语句
+    const result = await User.update({nickName, city},{
+        where: {
+            userName
+        }
+    })
+    return result[0] > 0
+}
+
 module.exports = {
     getUserInfo,
     registerUser,
-    deleteUser
+    deleteUser,
+    updateUser
 }
