@@ -73,4 +73,41 @@
 ### redis
 为何session适合用redis
 为何网站数据不适合用redis？
+
+## AJV: json格式校验工具
+```js
+<script src="https://cdn.bootcss.com/ajv/6.5.0/ajv.min.js"></script>
+<script>
+   var ajv = new Ajv();
+   var schema = {
+       "properties": {
+           "data": {
+               "type": "object",
+               "required": ["status", "message", "data"],
+               "properties": {
+                   "status": {
+                       "type": "number",
+                       "enum": [0, 1]
+                   },
+                   "message": {
+                       "type": "string"
+                   },
+                   "data": {
+                       "type": "array"
+                   }
+               }
+           }
+       }
+   };
+   var validData = {
+       data: {
+           data: [1, 2],
+           message: "不存在",
+           status: 0
+       }
+   };
+   var valid = ajv.validate(schema, validData);
+   if (!valid) console.log(ajv.errors);
+</script>
+```
  

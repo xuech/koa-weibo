@@ -19,4 +19,8 @@ module.exports = {
         code: 10004,
         message: '登录失败，用户名或密码错误'
     },
+    jsonSchemaFileInfo: {
+        code: 10005,
+        message: '数据格式校验错误'
+    }
 }
