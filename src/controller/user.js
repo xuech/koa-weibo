@@ -9,6 +9,8 @@ const {
     registerFailInfo,
     loginFailInfo
 } = require('../model/ErrorInfo')
+const doCrypto = require('../utils/cryp')
+
 /**
   * 用户名是否存在
   * @param {String} username 
@@ -35,7 +37,7 @@ async function doRegister({userName, password, gender}) {
     }
   
     try {
-        await registerUser({userName, password, gender})
+        await registerUser({userName, password: doCrypto(password), gender})
         return new SuccessModel()
     } catch (ex) {
         console.error(ex.message, ex.stack)
