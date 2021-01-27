@@ -49,7 +49,21 @@ async function registerUser({userName, password, gender = 3, nickName}) {
     return user.dataValues
 }
 
+/**
+ * 删除用户
+ * @param {string} userName 
+ */
+async function deleteUser(userName) {
+    const data = await User.destroy({
+        where: {
+            userName
+        }
+    })
+    return data > 0
+}
+
 module.exports = {
     getUserInfo,
-    registerUser
+    registerUser,
+    deleteUser
 }

@@ -1,7 +1,7 @@
 /**
  * @description user controller
  */
-const { getUserInfo, registerUser } = require('../services/user')
+const { getUserInfo, registerUser, deleteUser } = require('../services/user')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const {
     registerUserNameNotExistInfo,
@@ -58,8 +58,18 @@ async function doLogin({ctx, userName, password }) {
     }
 }
 
+async function deleteCurUser(userName) {
+    const result = await deleteUser(userName)
+    if (result) {
+        return new SuccessModel()
+    } else {
+        return new ErrorModel(deleteUserFailInfo)
+    }
+}
+
 module.exports = {
     isExist,
     doRegister,
-    doLogin
+    doLogin,
+    deleteCurUser
 }

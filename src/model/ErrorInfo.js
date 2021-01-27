@@ -28,4 +28,9 @@ module.exports = {
         code: 10006,
         message: '您尚未登录'
     },
+    // 删除用户失败
+    deleteUserFailInfo: {
+        code: 10007,
+        message: '删除用户失败'
+    },
 }
