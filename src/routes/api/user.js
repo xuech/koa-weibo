@@ -19,6 +19,6 @@ router.post('/registerUser', async (ctx, next) => {
 /// 用户登录
 router.post('/login', async (ctx, next) => {
     const { userName, password } = ctx.request.body
-    ctx.body = await doLogin({ userName, password })
+    ctx.body = await doLogin({ctx, userName, password })
 })
 module.exports = router

@@ -46,11 +46,12 @@ async function doRegister({userName, password, gender}) {
   
 }
 
-async function doLogin({ userName, password }) {
+async function doLogin({ctx, userName, password }) {
     // 未注册
     // 密码不对
-    const userData = await getUserInfo(userName, password)
+    const userData = await getUserInfo(userName, doCrypto(password))
     if (userData) {
+        ctx.session.userInfo = userData
         return new SuccessModel()
     } else {
         return new ErrorModel(loginFailInfo)
