@@ -1,11 +1,28 @@
 /**
  * @description 对返回的数据做格式化处理
  */
+/// It's like Lodash for dates https://www.npmjs.com/package/date-fns
+const { format } = require('date-fns')
 
 function _formatObj(obj) {
     if (obj.picture == null) {
         obj.picture = 'https://dwz.cn/rnTnftZs'
     }
+    return obj
+}
+
+function _formatDBTime(obj) {
+    obj.createdAtFormat = format(new Date(obj.createdAt), 'MM.dd HH:mm')
+    obj.updatedAtFormat = format(new Date(obj.updatedAt), 'MM.dd HH:mm')
+    return obj
+}
+
+function _formatContent(obj) {
+    // 正则表达式，匹配 '@昵称 - userName'
+    const regRole = /@(.+?)\s-\s(\w+?)\b/g   
+    obj.contentFormat = obj.content.replace(regRole,(matchStr, nickName, userName) => {
+        return `<a href="/profile/${userName}">@${nickName}</a>`
+    })
     return obj
 }
 
@@ -22,6 +39,25 @@ function formatUser(params) {
     return _formatObj(params)
 }
 
+/**
+ * 格式化微博信息
+ * @param {Array|Object} list 微博列表或者单个微博对象
+ */
+function formatBlog(list) {
+    if (list == null) {
+        return list
+    }
+    if (list instanceof Array) {
+        return list.map(_formatDBTime).map(_formatContent)
+    }
+    // 对象 
+    let result = list
+    result = _formatDBTime(result)
+    result = _formatContent(result)
+    return result
+}
+
 module.exports = {
-    formatUser
+    formatUser,
+    formatBlog
 }
