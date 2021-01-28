@@ -8,7 +8,7 @@ const logger = require('koa-logger')
 const redisKoa = require('koa-redis')
 const genericSession = require('koa-generic-session')
 const { REDIS_CONF } = require('./conf/db')
-const index = require('./routes/index')
+const blogsRouter = require('./routes/view/blogs')
 const user = require('./routes/view/user')
 const userAPI = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
@@ -52,7 +52,7 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(userAPI.routes(), userAPI.allowedMethods())
-app.use(index.routes(), index.allowedMethods())
+app.use(blogsRouter.routes(), blogsRouter.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) //404 放在最下
 
