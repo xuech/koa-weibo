@@ -99,11 +99,21 @@ async function changePassword({ ctx, password, newPassword}) {
     }
 }
 
+/**
+ * 退出登录
+ * @param {ctx} ctx 
+ */
+async function logout(ctx) {
+    delete ctx.session.userInfo
+    return new SuccessModel()
+}
+
 module.exports = {
     isExist,
     doRegister,
     doLogin,
     deleteCurUser,
     changeInfo,
-    changePassword
+    changePassword,
+    logout
 }
