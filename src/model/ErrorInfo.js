@@ -48,5 +48,9 @@ module.exports = {
     changePasswordFail: {
         code: 10011,
         message: '密码更新失败'
+    },
+    blogCreateFailInfo: {
+        code: 10020,
+        message: '创建微博失败'
     }
 }
