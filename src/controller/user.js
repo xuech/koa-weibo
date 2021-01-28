@@ -1,17 +1,19 @@
 /**
  * @description user controller
  */
-const { getUserInfo, registerUser, deleteUser, updateUser } = require('../services/user')
+const { getUserInfo, registerUser, deleteUser, updateUser, updatePassword } = require('../services/user')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const {
     registerUserNameNotExistInfo,
     registerUserNameExistInfo,
     registerFailInfo,
     loginFailInfo,
-    changeInfoFailInfo
+    changeInfoFailInfo,
+    oldPasswordFail,
+    newPasswordFail,
+    changePasswordFail
 } = require('../model/ErrorInfo')
 const doCrypto = require('../utils/cryp')
-
 /**
   * 用户名是否存在
   * @param {String} username 
@@ -79,10 +81,29 @@ async function changeInfo({ ctx, nickName, city }) {
     }
 }
 
+async function changePassword({ ctx, password, newPassword}) {
+    if (doCrypto(password) !== ctx.session.userInfo.password) {
+        return new ErrorModel(oldPasswordFail)
+    }
+    if (password === newPassword) {
+        return new ErrorModel(newPasswordFail)
+    }
+    const { userName } = ctx.session.userInfo
+    const doCryptoPassword = doCrypto(newPassword)
+    const res = await updatePassword({userName, password: doCrypto(password), doCryptoPassword})
+    if (res) {
+        ctx.session.userInfo.password = doCryptoPassword
+        return new SuccessModel()
+    } else {
+        return new ErrorModel(changePasswordFail)
+    }
+}
+
 module.exports = {
     isExist,
     doRegister,
     doLogin,
     deleteCurUser,
-    changeInfo
+    changeInfo,
+    changePassword
 }

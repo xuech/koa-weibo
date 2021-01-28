@@ -36,5 +36,17 @@ module.exports = {
     changeInfoFailInfo: {
         code: 10008,
         message: '用户更新失败'
+    },
+    oldPasswordFail: {
+        code: 10009,
+        message: '旧密码不正确'
+    },
+    newPasswordFail: {
+        code: 10010,
+        message: '新密码和旧密码相同'
+    },
+    changePasswordFail: {
+        code: 10011,
+        message: '密码更新失败'
     }
 }

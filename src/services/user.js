@@ -73,9 +73,20 @@ async function updateUser({userName, nickName, city }) {
     return result[0] > 0
 }
 
+async function updatePassword({ userName, password, doCryptoPassword }) {
+    const result = await User.update({ password: doCryptoPassword }, {
+        where: {
+            userName,
+            password
+        }
+    })
+    return result[0] > 0
+}
+
 module.exports = {
     getUserInfo,
     registerUser,
     deleteUser,
-    updateUser
+    updateUser,
+    updatePassword
 }
