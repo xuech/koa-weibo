@@ -7,6 +7,6 @@ module.exports = {
     String: Sequelize.STRING,
     Decimal: Sequelize.DECIMAL,
     Text: Sequelize.TEXT,
-    Interger: Sequelize.INTEGER,
+    Integer: Sequelize.INTEGER,
     Boolean: Sequelize.BOOLEAN
 }

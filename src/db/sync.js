@@ -9,6 +9,6 @@ seq.authenticate().then(() => {
 })
 
 /// 每次将表清空重新建
-seq.sync({ force: true }).then(() => {
+seq.sync({ force: false }).then(() => {
     process.exit()
 })
