@@ -13,6 +13,7 @@ const user = require('./routes/view/user')
 const userAPI = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
 const blogHomeAPIRouter = require('./routes/api/blog-home')
+const blogProfileAPIRouter = require('./routes/api/blog-profile')
 
 // error handler
 onerror(app)
@@ -54,6 +55,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(userAPI.routes(), userAPI.allowedMethods())
 app.use(blogHomeAPIRouter.routes(), blogHomeAPIRouter.allowedMethods())
+app.use(blogProfileAPIRouter.routes(), blogProfileAPIRouter.allowedMethods())
 app.use(blogsRouter.routes(), blogsRouter.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) //404 放在最下

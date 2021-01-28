@@ -23,7 +23,7 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     }
     /// 2. 获取该用户的微博列表
     const pageInfo = {
-        pageSize: 10,
+        pageSize: 3,
         pageIndex: 0
     }
     const result = await getProfileBlogList(name, pageInfo)
