@@ -52,5 +52,13 @@ module.exports = {
     blogCreateFailInfo: {
         code: 10020,
         message: '创建微博失败'
+    },
+    followFailInfo: {
+        code: 10021,
+        message: '关注用户失败'
+    },
+    unfollowFailInfo: {
+        code: 10021,
+        message: '取消关注用户失败'
     }
 }
