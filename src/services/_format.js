@@ -6,7 +6,7 @@ const { format } = require('date-fns')
 
 function _formatObj(obj) {
     if (obj.picture == null) {
-        obj.picture = 'https://dwz.cn/rnTnftZs'
+        obj.picture = 'https://images.dog.ceo/breeds/labrador/n02099712_9374.jpg'
     }
     return obj
 }

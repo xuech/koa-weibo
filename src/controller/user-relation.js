@@ -1,6 +1,15 @@
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
-const { followFailInfo, unfollowFailInfo } = require('../model/ErrorInfo')
-const { addFollower, deleteFollower } = require('../services/user-relation')
+const { followFailInfo, unfollowFailInfo,fansFailInfo } = require('../model/ErrorInfo')
+const { addFollower, deleteFollower, getUserByFollower, getFollowersByUser } = require('../services/user-relation')
+
+async function getFans(userId) {
+    const fansData = await getUserByFollower(userId)
+    if (fansData) {
+        return new SuccessModel(fansData)
+    } else {
+        return new ErrorModel(fansFailInfo)
+    }
+}
 
 async function follower(userId, currentId) {
     try {
@@ -20,7 +29,23 @@ async function unfollower(userId, currentId) {
     }
 }
 
+async function getFollowers(userId) {
+    const result = await getFollowersByUser(userId)
+    // const { user: list } = result.user
+    const { list, count } = result
+    console.log('ssss',result)
+    if (result) {
+        return new SuccessModel({
+            count,
+            list
+        })
+    } else {
+        return new ErrorModel()
+    }
+}
 module.exports = {
     follower,
-    unfollower
+    unfollower,
+    getFans,
+    getFollowers
 }

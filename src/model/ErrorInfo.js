@@ -58,7 +58,11 @@ module.exports = {
         message: '关注用户失败'
     },
     unfollowFailInfo: {
-        code: 10021,
+        code: 10022,
         message: '取消关注用户失败'
+    },
+    fansFailInfo: {
+        code: 10023,
+        message: '获取粉丝列表失败'
     }
 }
