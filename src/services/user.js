@@ -3,6 +3,7 @@
  */
 
 const { User } = require('../db/model/index')
+const { addFollower } = require('./user-relation')
 const { formatUser } = require('./_format')
 
 /**
@@ -46,7 +47,9 @@ async function registerUser({userName, password, gender = 3, nickName}) {
         gender,
         nickName: nickName ? nickName : userName
     })
-    return user.dataValues
+    const data = user.dataValues
+    addFollower(data.id, data.id)
+    return data
 }
 
 /**
