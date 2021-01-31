@@ -31,9 +31,7 @@ async function unfollower(userId, currentId) {
 
 async function getFollowers(userId) {
     const result = await getFollowersByUser(userId)
-    // const { user: list } = result.user
     const { list, count } = result
-    console.log('ssss',result)
     if (result) {
         return new SuccessModel({
             count,

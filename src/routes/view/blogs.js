@@ -1,12 +1,38 @@
 const router = require('koa-router')()
 const { loginRedirect } = require('../../middlewares/loginChecks')
 const { getProfileBlogList } =require('../../controller/blog-profile')
-const { getSquareBlogList } =require('../../controller/blog-square')
+const { getSquareBlogList } = require('../../controller/blog-square')
+const { getHomeBlogList } = require('../../controller/blog-home')
 const { isExist } = require('../../controller/user')
 const { getFans, getFollowers } = require('../../controller/user-relation')
 
-router.get('/',loginRedirect, async (ctx, next) => {
-    await ctx.render('index', ctx.session.userInfo)
+router.get('/', loginRedirect, async (ctx, next) => {
+    const userInfo = ctx.session.userInfo
+    const { id: userId } = userInfo
+    // 获取第一页数据
+    const result = await getHomeBlogList(userId)
+    const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
+
+    // 获取粉丝
+    const fansData = await getFans(userId)
+
+    const followersData = await getFollowers(userId)
+
+    await ctx.render('index', {
+        userData: {
+            userInfo,
+            fansData: fansData.data,
+            followersData: followersData.data,
+            atCount: 1
+        },
+        blogData: {
+            isEmpty,
+            blogList,
+            pageSize,
+            pageIndex,
+            count
+        }
+    })
 })
 // 访问自己的主页
 router.get('/profile', loginRedirect, async (ctx, next) => {

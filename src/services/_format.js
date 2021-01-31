@@ -3,7 +3,7 @@
  */
 /// It's like Lodash for dates https://www.npmjs.com/package/date-fns
 const { format } = require('date-fns')
-
+const REG_FOR_AT_WHO =  /@(.+?)-(\w+?)\b/g
 function _formatObj(obj) {
     if (obj.picture == null) {
         obj.picture = 'https://images.dog.ceo/breeds/labrador/n02099712_9374.jpg'
@@ -18,11 +18,18 @@ function _formatDBTime(obj) {
 }
 
 function _formatContent(obj) {
-    // 正则表达式，匹配 '@昵称 - userName'
-    const regRole = /@(.+?)\s-\s(\w+?)\b/g   
-    obj.contentFormat = obj.content.replace(regRole,(matchStr, nickName, userName) => {
-        return `<a href="/profile/${userName}">@${nickName}</a>`
-    })
+    obj.contentFormat = obj.content
+
+    // 格式化 @
+    // from '哈喽 @张三 - zhangsan 你好'
+    // to '哈喽 <a href="/profile/zhangsan">张三</a> 你好'
+    obj.contentFormat = obj.contentFormat.replace(
+        REG_FOR_AT_WHO,
+        (matchStr, nickName, userName) => {
+            return `<a href="/profile/${userName}">@${nickName}</a>`
+        }
+    )
+
     return obj
 }
 
