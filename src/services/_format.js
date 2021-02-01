@@ -3,7 +3,7 @@
  */
 /// It's like Lodash for dates https://www.npmjs.com/package/date-fns
 const { format } = require('date-fns')
-const REG_FOR_AT_WHO =  /@(.+?)-(\w+?)\b/g
+const REG_FOR_AT_WHO =  /@(.+?)\s-\s(\w+?)\b/g
 function _formatObj(obj) {
     if (obj.picture == null) {
         obj.picture = 'https://images.dog.ceo/breeds/labrador/n02099712_9374.jpg'

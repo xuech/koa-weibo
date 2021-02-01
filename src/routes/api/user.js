@@ -53,6 +53,7 @@ router.post('/logout', loginCheck, async (ctx, next) => {
 router.get('/getAtList', loginCheck, async (ctx, next) => {
     const { id: userId } = ctx.session.userInfo
     const result = await getFollowers(userId)
+    console.log(result.data.list)
     const list = result.data.list.map(user => {
         return `${user.nickName}-${user.userName}`
     })
