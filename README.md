@@ -45,6 +45,10 @@
     2. RESTRICT： 当在主键表中删除对应记录时，首先检查该记录是否有对应外键，如果有则不允许删除。
     3. SET NULL：当在主键表中删除对应记录时，首先检查该记录是否有对应外键，如果有则设置子表中该外键值为null。
 
+3. Sequelize 学习
+   https://github.com/demopark/sequelize-docs-Zh-CN/blob/master/core-concepts/model-basics.md
+
+
 ## 三、eslint、pre-commit等项目规范
 1. 新增 `.eslintignore` `.eslintrc.json`等文件
 2. 安装`babel-eslint`、`eslint`插件
@@ -120,3 +124,34 @@
  ## 后台渲染数据 SSR
  利用ejs.render方法，将分页的数据转为字符串格式返回给前端
  前端处理数据将它拼接到原来列表的后面
+
+ ## 日志
+ 1. nginx：access log 【前端不是很关心，一般是运维比较在意】
+ 2. console.log
+ 3. console.err
+
+## Node最佳实践
+- 项目结构
+  - 分层：routes controller cache services db等
+  - 抽离中间件、抽离utils、config等工具及配置
+  - 区分app、www
+  - 使用NODE_ENV区分环境            【cross-env】
+- 错误处理
+  - 规范错误数据（错误码、错误信息）    【ErrorInfo】
+  - 统一错误输出（404页面）
+  - 对输入数据进行 schema 验证       【ajv】
+- 代码风格
+  - 使用eslint并强制pre-commit
+  - 使用jsdoc注释文件和函数
+  - 使用 async/ awit编写异步逻辑
+  - 规范 git 分支和 commit 格式
+- 质量保证
+  - 编写单元测试                    【jest】
+- 安全
+  - 处理xss                         【xss】
+  - 加密铭感信息、密码                【crypt】
+- 线上环境
+  - 记录日志
+  - 多进程及进程守护
+  - nginx代理
+  - 系统监控APM
