@@ -5,7 +5,7 @@ const { getSquareBlogList } = require('../../controller/blog-square')
 const { getHomeBlogList } = require('../../controller/blog-home')
 const { isExist } = require('../../controller/user')
 const { getFans, getFollowers } = require('../../controller/user-relation')
-const { getAtMeCount,getAtMeBlogList } = require('../../controller/blog-at')
+const { getAtMeCount,getAtMeBlogList,markAsIsRead } = require('../../controller/blog-at')
 
 router.get('/', loginRedirect, async (ctx, next) => {
     const userInfo = ctx.session.userInfo
@@ -126,6 +126,10 @@ router.get('/at-me', loginRedirect, async (ctx, next) => {
             pageIndex,
             pageSize: 10
         }
-    })
+    }) 
+
+    if (atCount > 0) {
+        await markAsIsRead(userId)
+    }
 })
 module.exports = router

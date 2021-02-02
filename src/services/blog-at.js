@@ -42,7 +42,18 @@ async function getAtUserBlogList({ userId, pageIndex, pageSize = 10 }) {
     }
 }
 
+async function updateAtRelation(updateVal, { userId, isRead}) {
+    const result = await AtRelation.update({ isRead: updateVal }, {
+        where: {
+            userId,
+            isRead
+        }
+    })
+    return result[0] > 0
+}
+
 module.exports = {
     getAtRelationCount,
-    getAtUserBlogList
+    getAtUserBlogList,
+    updateAtRelation
 }

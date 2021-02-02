@@ -1,5 +1,5 @@
 const { SuccessModel } = require('../model/ResModel')
-const { getAtRelationCount, getAtUserBlogList } = require('../services/blog-at')
+const { getAtRelationCount, getAtUserBlogList,updateAtRelation } = require('../services/blog-at')
 
 async function getAtMeCount(userId) {
     const count = await getAtRelationCount(userId)
@@ -24,7 +24,13 @@ async function getAtMeBlogList(userId, pageIndex = 0) {
     })
 }
 
+async function markAsIsRead(userId) {
+    /// 第一个参数是要更新的值，第二个参数是查询条件，满足userId，并且isRead=false的数据
+    await updateAtRelation(true, { userId , isRead: false})
+}
+
 module.exports = {
     getAtMeCount,
-    getAtMeBlogList
+    getAtMeBlogList,
+    markAsIsRead
 }
