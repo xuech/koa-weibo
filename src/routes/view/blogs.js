@@ -5,7 +5,7 @@ const { getSquareBlogList } = require('../../controller/blog-square')
 const { getHomeBlogList } = require('../../controller/blog-home')
 const { isExist } = require('../../controller/user')
 const { getFans, getFollowers } = require('../../controller/user-relation')
-const { getAtMeCount } = require('../../controller/blog-at')
+const { getAtMeCount,getAtMeBlogList } = require('../../controller/blog-at')
 
 router.get('/', loginRedirect, async (ctx, next) => {
     const userInfo = ctx.session.userInfo
@@ -105,6 +105,26 @@ router.get('/square', loginRedirect, async (ctx, next) => {
             pageSize,
             pageIndex,
             count
+        }
+    })
+})
+
+router.get('/at-me', loginRedirect, async (ctx, next) => {
+    const { id: userId } = ctx.session.userInfo
+    const atCountResult = await getAtMeCount(userId)
+    const { count: atCount } = atCountResult.data
+
+    // 获取第一页列表
+    const result = await getAtMeBlogList(userId)
+    const { count, blogList , isEmpty, pageIndex} = result.data
+    await ctx.render('atMe', {
+        atCount,
+        blogData: {
+            isEmpty,
+            blogList,
+            count,
+            pageIndex,
+            pageSize: 10
         }
     })
 })
